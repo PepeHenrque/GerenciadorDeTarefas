@@ -1,0 +1,28 @@
+<div class="card">
+  <p class="identificacao">PepeHenrque</p>
+  <h1>Minhas tarefas</h1>
+
+  <form class="form" (ngSubmit)="adicionar()">
+    <input name="texto" placeholder="Digite uma tarefa..." [(ngModel)]="texto" />
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <ul>
+    @for (tarefa of tarefas(); track tarefa.id) {
+      <li>
+        <label [class.concluida]="tarefa.concluida">
+          <input type="checkbox" [checked]="tarefa.concluida" (change)="alternar(tarefa.id)" />
+          {{ tarefa.titulo }}
+        </label>
+        <button class="excluir" (click)="excluir(tarefa.id)">Excluir</button>
+      </li>
+    } @empty {
+      <li class="vazia">Nenhuma tarefa cadastrada.</li>
+    }
+  </ul>
+
+  <footer>
+    <span>Total: {{ tarefas().length }}</span>
+    <span>Pendentes: {{ pendentes() }}</span>
+  </footer>
+</div>
